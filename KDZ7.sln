@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 25.0.1706.9
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KDZ7", "KDZ7\KDZ7.csproj", "{5AC80809-C9E1-466C-A97D-D6B5EB6F0E3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StationsLib", "StationsLib\StationsLib.csproj", "{0B3EC664-C2EA-4A54-93BE-8C6CC3513464}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5AC80809-C9E1-466C-A97D-D6B5EB6F0E3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AC80809-C9E1-466C-A97D-D6B5EB6F0E3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AC80809-C9E1-466C-A97D-D6B5EB6F0E3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AC80809-C9E1-466C-A97D-D6B5EB6F0E3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B3EC664-C2EA-4A54-93BE-8C6CC3513464}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B3EC664-C2EA-4A54-93BE-8C6CC3513464}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B3EC664-C2EA-4A54-93BE-8C6CC3513464}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B3EC664-C2EA-4A54-93BE-8C6CC3513464}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E72297FB-F4CC-4955-B7F6-ED61CFECD91E}
+	EndGlobalSection
+EndGlobal
