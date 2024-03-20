@@ -8,7 +8,7 @@ namespace KDZ7
 		WaitingFieldForFiltration,
 		WaitingNameOfStation,
 		WaitingLine,
-		WaitingNameOfStationAndLine,
+		WaitingNameOfStationAndMonth,
 		WaitingFieldForSorting,
 		WaitingTypeForFile
 	}

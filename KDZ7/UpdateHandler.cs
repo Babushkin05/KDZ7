@@ -129,8 +129,8 @@ namespace KDZ7
                                                     throw new Exception("Unexpect this command in current moment");
                                                 await botClient.SendTextMessageAsync(
                                                     chat.Id,
-                                                    "Okey, firstly send name of station to filter data (in quotes : \"NAME\")");
-                                                usersData[user.Id].State = UserState.WaitingNameOfStationAndLine;
+                                                    "Okey, firstly send name of month to filter data (in quotes : \"NAME\")");
+                                                usersData[user.Id].State = UserState.WaitingNameOfStationAndMonth;
                                                 return;
                                             }
                                         case "Year ascending":
@@ -200,7 +200,7 @@ namespace KDZ7
                                                 UserState curState = usersData[user.Id].State;
                                                 if (curState == UserState.WaitingNameOfStation ||
                                                     curState == UserState.WaitingLine ||
-                                                    curState == UserState.WaitingNameOfStationAndLine)
+                                                    curState == UserState.WaitingNameOfStationAndMonth)
                                                 {
                                                     if (message.Text[0] != '"' || message.Text[^1] != '"')
                                                     {
@@ -237,12 +237,12 @@ namespace KDZ7
                                                     else
                                                     {
                                                         stations = (from station in stations
-                                                                    where station.NameOfStation == name
+                                                                    where station.Month == name
                                                                     select station).ToList();
                                                         await botClient.SendTextMessageAsync(
                                                             chat.Id,
-                                                            "Okey, now send name of line to filter data (in quotes : \"NAME\")");
-                                                        usersData[user.Id].State = UserState.WaitingLine;
+                                                            "Okey, now send name of station to filter data (in quotes : \"NAME\")");
+                                                        usersData[user.Id].State = UserState.WaitingNameOfStation;
                                                     }
 
                                                 }
