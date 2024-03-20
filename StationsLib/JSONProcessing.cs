@@ -14,9 +14,10 @@ namespace StationsLib
 			Stream stream = new MemoryStream();
 			StreamWriter writer = new StreamWriter(stream);
 
-            JsonSerializerOptions options = new JsonSerializerOptions
-            {
-                WriteIndented = true
+			JsonSerializerOptions options = new JsonSerializerOptions
+			{
+				WriteIndented = true,
+				Encoder = System.Text.Encodings.Web.JavaScriptEncoder.Create(System.Text.Unicode.UnicodeRanges.Cyrillic, System.Text.Unicode.UnicodeRanges.BasicLatin)
             };
             string JsonText = JsonSerializer.Serialize(stations, options);
 

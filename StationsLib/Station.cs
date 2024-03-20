@@ -21,12 +21,7 @@ public class Station
     public string? NameOfStation
     {
         get => nameOfStation_;
-        set
-        {
-            if (NameOfStation != default(string?))
-                throw new Exception("Name of station already setted.");
-            nameOfStation_ = value;
-        }
+        set => nameOfStation_ = value;
     }
 
     private string? line_;
@@ -34,12 +29,7 @@ public class Station
     public string? Line
     {
         get => line_;
-        set
-        {
-            if (Line != default(string?))
-                throw new Exception("Name of line already setted.");
-            line_ = value;
-        }
+        set => line_ = value;
     }
 
     private double longtitude_;
@@ -47,13 +37,7 @@ public class Station
     public double Longitude_WGS84
     {
         get => longtitude_;
-        set
-        {
-            if (Longitude_WGS84 != default(double))
-                throw new Exception("Longtitude already was setted.");
-
-            longtitude_ = value;
-        }
+        set => longtitude_ = value;
     }
 
     private double latitude_;
@@ -61,12 +45,7 @@ public class Station
     public double Latitude_WGS84
     {
         get => latitude_;
-        set
-        {
-            if (Latitude_WGS84 != default(double))
-                throw new Exception("Latitude already setted.");
-            latitude_ = value;
-        }
+        set => latitude_ = value;
     }
 
     private string? admArea_;
@@ -74,12 +53,7 @@ public class Station
     public string? AdmArea
     {
         get => admArea_;
-        set
-        {
-            if (AdmArea != default(string?))
-                throw new Exception("AdmArea already setted.");
-            admArea_ = value;
-        }
+        set => admArea_ = value;
     }
 
     private string? district_;
@@ -87,12 +61,7 @@ public class Station
     public string? District
     {
         get => district_;
-        set
-        {
-            if (District != default(string?))
-                throw new Exception("District already setted.");
-            district_ = value;
-        }
+        set => district_ = value;
     }
 
     private int year_;
@@ -100,12 +69,7 @@ public class Station
     public int Year
     {
         get => year_;
-        set
-        {
-            if (Year != default(int))
-                throw new Exception("Year already setted.");
-            year_ = value;
-        }
+        set => year_ = value;
     }
 
     private string? month_;
@@ -113,17 +77,12 @@ public class Station
     public string? Month
     {
         get => month_;
-        set
-        {
-            if (Month != default(string?))
-                throw new Exception("Month already setted.");
-            month_ = value;
-        }
+        set => month_ = value;
     }
 
-    private int global_id_;
+    private System.Int64 global_id_;
 
-    public int global_id
+    public System.Int64 global_id
     {
         get => global_id_;
         set
@@ -141,12 +100,7 @@ public class Station
     public string? geodata_center
     {
         get => geodata_center_;
-        set
-        {
-            if (geodata_center != default(string?))
-                throw new Exception("Geodata center already setted");
-            geodata_center_ = value;
-        }
+        set => geodata_center_ = value;
     }
 
     private string? geoarea_;
@@ -154,12 +108,7 @@ public class Station
     public string? geoarea
     {
         get => geoarea_;
-        set
-        {
-            if (geoarea != default(string?))
-                throw new Exception("Geoarea already setted");
-            geoarea_ = value;
-        }
+        set => geoarea_ = value;
     }
 
     public Station()
@@ -180,7 +129,7 @@ public class Station
 
     public Station(int id, string? nameOfStation, string line, double longtitude
         ,double latitude, string? admArea, string? district, int year, string? month,
-        int globalId, string? geodataCenter, string? geoArea)
+        System.Int64 globalId, string? geodataCenter, string? geoArea)
     {
         ID = id;
         NameOfStation = nameOfStation;
@@ -219,9 +168,6 @@ public class Station
         }
 
     }
-
-
-
 
 }
 

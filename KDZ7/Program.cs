@@ -1,4 +1,8 @@
 ﻿using Telegram.Bot;
+using Telegram.Bot.Exceptions;
+using Telegram.Bot.Polling;
+using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 
 namespace KDZ7
 {
@@ -6,15 +10,12 @@ namespace KDZ7
     {
         public static async Task Main(string[] args)
         {
-            var botClient = new TelegramBotClient("code");
 
-            Stream stream = new MemoryStream();
-            StreamWriter writer = new StreamWriter(stream);
-            writer.Write("hello");
-            writer.Flush();
-            stream.Position = 0;
-            StreamReader reader = new StreamReader(stream);
-            Console.WriteLine(reader.ReadLine());
+            StationsTgBot bot = new StationsTgBot("code");
+            await bot.LaunchBot();
+
         }
+
+        
     }
 }
