@@ -1,4 +1,5 @@
-﻿using Telegram.Bot;
+﻿// https://github.com/Babushkin05/KDZ7.git
+using Telegram.Bot;
 using Telegram.Bot.Exceptions;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
