@@ -1,1 +1,6 @@
-3/21/2024 11:48:55 PM [Information] - StationsBot Started!
+3/22/2024 12:34:44 AM [Information] - StationsBot Started!
+3/22/2024 12:34:48 AM [Information] - Вова (881927381) send message: Read data from file
+3/22/2024 12:34:48 AM [Information] - exception :: The given key '881927381' was not present in the dictionary.
+3/22/2024 12:34:51 AM [Information] - Вова (881927381) send message: /start
+3/22/2024 12:34:51 AM [Information] - bot send to @babushkin05 (881927381) message : Welcome in metroStationsBot. There you can process you data about metrostations. 
+3/22/2024 12:34:51 AM [Information] - Initialize new user : @babushkin05 (881927381)
