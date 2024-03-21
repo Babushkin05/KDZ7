@@ -5,6 +5,7 @@ namespace KDZ7
 {
 	public partial class StationsTgBot
 	{
+        // Main menu keyboard.
         private ReplyKeyboardMarkup menuKeyboard = new ReplyKeyboardMarkup(
             new List<KeyboardButton[]>()
             {
@@ -21,6 +22,7 @@ namespace KDZ7
             })
         { ResizeKeyboard = true };
 
+        // Menu for filtration data.
         private ReplyKeyboardMarkup menuForFiltration = new ReplyKeyboardMarkup(
             new List<KeyboardButton>()
             {
@@ -30,6 +32,7 @@ namespace KDZ7
             })
         { ResizeKeyboard = true };
 
+        // Menu for sorting data.
         private ReplyKeyboardMarkup menuForSorting = new ReplyKeyboardMarkup(
             new List<KeyboardButton>()
             {

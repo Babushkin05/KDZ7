@@ -8,54 +8,67 @@ using StationsLib;
 
 namespace KDZ7
 {
+    /// <summary>
+    /// Class of StationsTgBot.
+    /// </summary>
 	public partial class StationsTgBot
 	{
+        //BotClient.
         private ITelegramBotClient _botClient;
+
+        // Options of reciver.
         private  ReceiverOptions _receiverOptions;
+
+        // Api key to bot.
         private string HttpApiKey;
 
+        // Saving data of users states.
         private Dictionary<System.Int64, UserData> usersData;
-        private List<Station> stations;
+
+        // Name of downloaded file.
         private string currentFileName;
 
+        // Empty constructor.
 		public StationsTgBot()
 		{
 			throw new ArgumentNullException("no http api key to start bot");
 		}
 
+        // Constructor.
 		public StationsTgBot(string apiKey)
 		{
+            // Initializing useful fields.
 			HttpApiKey = apiKey;
             usersData = new Dictionary<System.Int64, UserData>();
             _botClient = new TelegramBotClient(HttpApiKey);
 
             _receiverOptions = new ReceiverOptions
             {
-                AllowedUpdates = new[] // Тут указываем типы получаемых Update`ов, о них подробнее расказано тут https://core.telegram.org/bots/api#update
+                AllowedUpdates = new[] 
             {
-                UpdateType.Message, // Сообщения (текст, фото/видео, голосовые/видео сообщения и т.д.)
+                UpdateType.Message, 
             },
-                // Параметр, отвечающий за обработку сообщений, пришедших за то время, когда ваш бот был оффлайн
-                // True - не обрабатывать, False (стоит по умолчанию) - обрабаывать
                 ThrowPendingUpdates = true,
             };
         }
 
+        /// <summary>
+        /// Method for start recieving.
+        /// </summary>
+        /// <returns></returns>
         public async Task LaunchBot()
         {
 
             using var cts = new CancellationTokenSource();
 
+            _botClient.StartReceiving(UpdateHandler, ErrorHandler, _receiverOptions, cts.Token); 
 
-            // UpdateHander - обработчик приходящих Update`ов
-            // ErrorHandler - обработчик ошибок, связанных с Bot API
-            _botClient.StartReceiving(UpdateHandler, ErrorHandler, _receiverOptions, cts.Token); // Запускаем бота
-
-            var me = await _botClient.GetMeAsync(); // Создаем переменную, в которую помещаем информацию о нашем боте.
+            var me = await _botClient.GetMeAsync(); 
 
             Console.WriteLine($"{me.FirstName} Started!");
 
-            await Task.Delay(-1); // Устанавливаем бесконечную задержку, чтобы наш бот работал постоянно
+            // Endless pooling.
+            await Task.Delay(-1); 
         }
 	}
 }

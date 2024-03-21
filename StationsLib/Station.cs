@@ -1,6 +1,10 @@
 ﻿namespace StationsLib;
+/// <summary>
+/// Station class.
+/// </summary>
 public class Station
 {
+    // id os atation.
     private int id_;
 
     public int ID
@@ -16,6 +20,7 @@ public class Station
         }
     }
 
+    // Name of station.
     private string? nameOfStation_;
 
     public string? NameOfStation
@@ -24,6 +29,7 @@ public class Station
         set => nameOfStation_ = value;
     }
 
+    // Name of line.
     private string? line_;
 
     public string? Line
@@ -32,6 +38,7 @@ public class Station
         set => line_ = value;
     }
 
+    // Longtitude of station.
     private double longtitude_;
 
     public double Longitude_WGS84
@@ -40,6 +47,7 @@ public class Station
         set => longtitude_ = value;
     }
 
+    // Latitude of station.
     private double latitude_;
 
     public double Latitude_WGS84
@@ -48,6 +56,7 @@ public class Station
         set => latitude_ = value;
     }
 
+    // AdmArea of station.
     private string? admArea_;
 
     public string? AdmArea
@@ -56,6 +65,7 @@ public class Station
         set => admArea_ = value;
     }
 
+    // District of station.
     private string? district_;
 
     public string? District
@@ -64,6 +74,7 @@ public class Station
         set => district_ = value;
     }
 
+    // Year of data.
     private int year_;
 
     public int Year
@@ -72,6 +83,7 @@ public class Station
         set => year_ = value;
     }
 
+    // Month of data.
     private string? month_;
 
     public string? Month
@@ -80,6 +92,7 @@ public class Station
         set => month_ = value;
     }
 
+    // Id of data.
     private System.Int64 global_id_;
 
     public System.Int64 global_id
@@ -95,6 +108,7 @@ public class Station
         }
     }
 
+    // GeoData center.
     private string? geodata_center_;
 
     public string? geodata_center
@@ -103,6 +117,7 @@ public class Station
         set => geodata_center_ = value;
     }
 
+    //Geoarea.
     private string? geoarea_;
 
     public string? geoarea
@@ -111,6 +126,7 @@ public class Station
         set => geoarea_ = value;
     }
 
+    // Empty constructor.
     public Station()
     {
         ID = 0;
@@ -127,6 +143,7 @@ public class Station
         geoarea = "";
     }
 
+    // Constructor.
     public Station(int id, string? nameOfStation, string line, double longtitude
         ,double latitude, string? admArea, string? district, int year, string? month,
         System.Int64 globalId, string? geodataCenter, string? geoArea)
@@ -145,6 +162,7 @@ public class Station
         geoarea = geoArea;
     }
 
+    // Indexer.
     public object? this[string name]
     {
         get

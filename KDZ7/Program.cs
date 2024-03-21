@@ -8,10 +8,20 @@ namespace KDZ7
 {
     class Program
     {
+        /// <summary>
+        /// Main methon to start program.
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public static async Task Main(string[] args)
         {
+            // Api key to bot.
+            string tgBotApiKey = "KEY";
 
-            StationsTgBot bot = new StationsTgBot("tgbotapikey");
+            // Create tgBot example.
+            StationsTgBot bot = new StationsTgBot(tgBotApiKey);
+
+            // Start bot working.
             await bot.LaunchBot();
 
         }
