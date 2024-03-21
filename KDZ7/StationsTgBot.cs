@@ -43,7 +43,7 @@ namespace KDZ7
 		{
             // Creating Logger.
             var separator = Path.DirectorySeparatorChar;
-            var logPath = $"..{separator}..{separator}var{separator}log.txt";
+            var logPath = $"var{separator}log.txt";
             System.IO.File.WriteAllText(logPath,"");
             var loggerFactory = LoggerFactory.Create(builder =>
             {
