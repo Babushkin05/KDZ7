@@ -15,6 +15,8 @@ namespace KDZ7
         /// <returns></returns>
         public static async Task Main(string[] args)
         {
+            // I host this bot: @stations_tgbot
+
             // Api key to bot.
             string tgBotApiKey = "6853916219:AAEcJ6-faiX_VIPaLKFYkcIHP3p5QzygpN8";
 

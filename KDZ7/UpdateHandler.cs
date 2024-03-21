@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Reflection.Metadata;
+using Microsoft.Extensions.Logging;
 using StationsLib;
 using Telegram.Bot;
 using Telegram.Bot.Types;
@@ -29,7 +30,7 @@ namespace KDZ7
                             var message = update.Message;
                             var user = message.From;
                             // Log data.
-                            Console.WriteLine($"{user.FirstName} ({user.Id}) send message: {message.Text}");
+                            _logger.LogInformation($"{user.FirstName} ({user.Id}) send message: {message.Text}");
 
                             var chat = message.Chat;
                             // Trying to process sended message.
@@ -41,15 +42,19 @@ namespace KDZ7
                                     {
                                         case "/start":
                                             {
+                                                string msg = "Welcome in metroStationsBot. There you can process you data about metrostations. ";
                                                 // First message.
                                                 await botClient.SendTextMessageAsync(
                                                     chat.Id,
-                                                    "Welcome in metroStationsBot. There you can process you data about metrostations. ",
+                                                    msg,
                                                     replyMarkup: menuKeyboard
                                                      );
 
+                                                _logger.LogInformation($"bot send to {user} message : {msg}");
+
                                                 // Made states.
                                                 UserData userData = new UserData(user);
+                                                _logger.LogInformation($"Initialize new user : {user}");
                                                 userData.State = UserState.InMenu;
                                                 usersData[user.Id] = userData;
                                                 return;
@@ -60,13 +65,16 @@ namespace KDZ7
                                                 if (usersData[user.Id].State != UserState.InMenu)
                                                     throw new Exception("Unexpect this command in current moment");
 
+                                                string msg = "Okey, send file in json or csv format";
                                                 // Send message.
                                                 await botClient.SendTextMessageAsync(
                                                     chat.Id,
-                                                    "Okey, send file in json or csv format");
+                                                    msg);
+                                                _logger.LogInformation($"bot send new message - {msg}");
 
                                                 //Update states.
                                                 usersData[user.Id].State = UserState.WaitingFile;
+                                                _logger.LogInformation($"{user} new state - {usersData[user.Id].State}");
                                                 return;
                                             }
                                         case "Filter list of stations":
@@ -79,14 +87,18 @@ namespace KDZ7
                                                 if (usersData[user.Id].Stations is null)
                                                     throw new Exception("Unable to process null data.");
 
+                                                string msg = "Okey, choose field for filtration : ";
                                                 // Send message.
                                                 await botClient.SendTextMessageAsync(
                                                     chat.Id,
-                                                    "Okey, choose field for filtration : ",
+                                                    msg,
                                                     replyMarkup: menuForFiltration);
+
+                                                _logger.LogInformation($"bot send to {user} message : {msg}");
 
                                                 //Update states.
                                                 usersData[user.Id].State = UserState.WaitingFieldForFiltration;
+                                                _logger.LogInformation($"{user} new state - {usersData[user.Id].State}");
                                                 return;
                                             }
                                         case "Sort list of stations":
@@ -99,14 +111,18 @@ namespace KDZ7
                                                 if (usersData[user.Id].Stations is null)
                                                     throw new Exception("Unable to process null data.");
 
+                                                string msg = "Okey, choose field for sorting : ";
                                                 // Send message.
                                                 await botClient.SendTextMessageAsync(
                                                     chat.Id,
-                                                    "Okey, choose field for sorting : ",
+                                                    msg,
                                                     replyMarkup: menuForSorting);
+
+                                                _logger.LogInformation($"bot send to {user} message : {msg}");
 
                                                 //Update states.
                                                 usersData[user.Id].State = UserState.WaitingFieldForSorting;
+                                                _logger.LogInformation($"{user} new state - {usersData[user.Id].State}");
                                                 return;
                                             }
                                         case "Dowloand current file":
@@ -119,14 +135,18 @@ namespace KDZ7
                                                 if (usersData[user.Id].Stations is null)
                                                     throw new Exception("Unable to download null data.");
 
+                                                string msg = "Choose type for dowlanded file : ";
                                                 // Send message.
                                                 await botClient.SendTextMessageAsync(
                                                     chat.Id,
-                                                    "Choose type for dowlanded file : ",
+                                                    msg,
                                                     replyMarkup: menuForFileType);
+
+                                                _logger.LogInformation($"bot send to {user} message : {msg}");
 
                                                 //Update states.
                                                 usersData[user.Id].State = UserState.WaitingTypeForFile;
+                                                _logger.LogInformation($"{user} new state - {usersData[user.Id].State}");
                                                 return;
                                             }
                                         case "NameOfStation":
@@ -135,13 +155,17 @@ namespace KDZ7
                                                 if (usersData[user.Id].State != UserState.WaitingFieldForFiltration)
                                                     throw new Exception("Unexpect this command in current moment");
 
+                                                string msg = "Okey, Send name of station to filter data (in quotes : \"NAME\")";
                                                 // Send message.
                                                 await botClient.SendTextMessageAsync(
                                                     chat.Id,
-                                                    "Okey, Send name of station to filter data (in quotes : \"NAME\")");
+                                                    msg);
+
+                                                _logger.LogInformation($"bot send to {user} message : {msg}");
 
                                                 //Update states.
                                                 usersData[user.Id].State = UserState.WaitingNameOfStation;
+                                                _logger.LogInformation($"{user} new state - {usersData[user.Id].State}");
                                                 return;
                                             }
                                         case "Line":
@@ -150,13 +174,17 @@ namespace KDZ7
                                                 if (usersData[user.Id].State != UserState.WaitingFieldForFiltration)
                                                     throw new Exception("Unexpect this command in current moment");
 
+                                                string msg = "Okey, Send name of line to filter data (in quotes : \"NAME\")";
                                                 // Send message.
                                                 await botClient.SendTextMessageAsync(
                                                     chat.Id,
-                                                    "Okey, Send name of line to filter data (in quotes : \"NAME\")");
+                                                    msg);
+
+                                                _logger.LogInformation($"bot send to {user} message : {msg}");
 
                                                 //Update states.
                                                 usersData[user.Id].State = UserState.WaitingLine;
+                                                _logger.LogInformation($"{user} new state - {usersData[user.Id].State}");
                                                 return;
                                             }
                                         case "NameOfStation and Month":
@@ -165,13 +193,17 @@ namespace KDZ7
                                                 if (usersData[user.Id].State != UserState.WaitingFieldForFiltration)
                                                     throw new Exception("Unexpect this command in current moment");
 
+                                                string msg = "Okey, firstly send name of month to filter data (in quotes : \"NAME\")";
                                                 // Send message.
                                                 await botClient.SendTextMessageAsync(
                                                     chat.Id,
-                                                    "Okey, firstly send name of month to filter data (in quotes : \"NAME\")");
+                                                    msg);
+
+                                                _logger.LogInformation($"bot send to {user} message : {msg}");
 
                                                 //Update states.
                                                 usersData[user.Id].State = UserState.WaitingNameOfStationAndMonth;
+                                                _logger.LogInformation($"{user} new state - {usersData[user.Id].State}");
                                                 return;
                                             }
                                         case "Year ascending":
@@ -182,15 +214,20 @@ namespace KDZ7
 
                                                 // Making Sorting.
                                                 usersData[user.Id].Stations.Sort((a, b) => a.Year.CompareTo(b.Year));
+                                                _logger.LogInformation($"bot sort data by year for {user}");
 
+                                                string msg = "Sorting finished correct";
                                                 // Send message.
                                                 await botClient.SendTextMessageAsync(
                                                     chat.Id,
-                                                    "Sorting finished correct",
+                                                    msg,
                                                     replyMarkup: menuKeyboard);
+
+                                                _logger.LogInformation($"bot send to {user} message : {msg}");
 
                                                 //Update states.
                                                 usersData[user.Id].State = UserState.InMenu;
+                                                _logger.LogInformation($"{user} new state - {usersData[user.Id].State}");
                                                 return;
                                             }
                                         case "NameOfStation by alphabet":
@@ -201,15 +238,20 @@ namespace KDZ7
 
                                                 // Making sorting.
                                                 usersData[user.Id].Stations.Sort((a, b) => a.NameOfStation.CompareTo(b.NameOfStation));
+                                                _logger.LogInformation($"bot sort data by name of station for {user}");
 
+                                                string msg = "Sorting finished correct";
                                                 // Send message.
                                                 await botClient.SendTextMessageAsync(
                                                     chat.Id,
-                                                    "Sorting finished correct",
+                                                    msg,
                                                     replyMarkup: menuKeyboard);
+
+                                                _logger.LogInformation($"bot send to {user} message : {msg}");
 
                                                 //Update states.
                                                 usersData[user.Id].State = UserState.InMenu;
+                                                _logger.LogInformation($"{user} new state - {usersData[user.Id].State}");
                                                 return;
                                             }
                                         case "JSON":
@@ -231,6 +273,7 @@ namespace KDZ7
 
                                                 //Update states.
                                                 usersData[user.Id].State = UserState.InMenu;
+                                                _logger.LogInformation($"{user} new state - {usersData[user.Id].State}");
                                                 return;
                                             }
                                         case "CSV":
@@ -252,6 +295,7 @@ namespace KDZ7
 
                                                 //Update states.
                                                 usersData[user.Id].State = UserState.InMenu;
+                                                _logger.LogInformation($"{user} new state - {usersData[user.Id].State}");
                                                 return;
                                             }
                                         default:
@@ -266,9 +310,12 @@ namespace KDZ7
                                                     if (message.Text[0] != '"' || message.Text[^1] != '"')
                                                     {
                                                         // Send message.
+                                                        string msg = "Send name IN QUOTES ( \"NAME\")";
                                                         await botClient.SendTextMessageAsync(
                                                             chat.Id,
-                                                            "Send name IN QUOTES ( \"NAME\")");
+                                                            msg);
+
+                                                        _logger.LogInformation($"bot send to {user} message : {msg}");
                                                         return;
                                                     }
                                                     string name = message.Text.Trim('"');
@@ -280,12 +327,16 @@ namespace KDZ7
                                                             (from station in usersData[user.Id].Stations
                                                              where station.NameOfStation == name
                                                              select station).ToList();
+                                                        _logger.LogInformation($"bot filter file by name of station for {user}");
 
                                                         // Send message.
+                                                        string msg = "Filtration finished correctly";
                                                         await botClient.SendTextMessageAsync(
                                                             chat.Id,
-                                                            "Filtration finished correctly",
+                                                            msg,
                                                             replyMarkup: menuKeyboard);
+
+                                                        _logger.LogInformation($"bot send to {user} message : {msg}");
 
                                                         //Update states.
                                                         usersData[user.Id].State = UserState.InMenu;
@@ -297,12 +348,16 @@ namespace KDZ7
                                                             (from station in usersData[user.Id].Stations
                                                              where station.Line == name
                                                              select station).ToList();
+                                                        _logger.LogInformation($"bot filter file by name of line for {user}");
 
                                                         // Send message.
+                                                        string msg = "Filtration finished correctly";
                                                         await botClient.SendTextMessageAsync(
                                                             chat.Id,
-                                                            "Filtration finished correctly",
+                                                            msg,
                                                             replyMarkup: menuKeyboard);
+
+                                                        _logger.LogInformation($"bot send to {user} message : {msg}");
 
                                                         //Update states.
                                                         usersData[user.Id].State = UserState.InMenu;
@@ -314,24 +369,32 @@ namespace KDZ7
                                                             (from station in usersData[user.Id].Stations
                                                              where station.Month == name
                                                              select station).ToList();
+                                                        _logger.LogInformation($"bot filter file by month for {user}");
 
                                                         // Send message.
+                                                        string msg = "Okey, now send name of station to filter data (in quotes : \"NAME\")";
                                                         await botClient.SendTextMessageAsync(
                                                             chat.Id,
-                                                            "Okey, now send name of station to filter data (in quotes : \"NAME\")");
+                                                            msg);
+
+                                                        _logger.LogInformation($"bot send to {user} message : {msg}");
 
                                                         //Update states.
                                                         usersData[user.Id].State = UserState.WaitingNameOfStation;
+                                                        _logger.LogInformation($"{user} new state - {usersData[user.Id].State}");
                                                     }
 
                                                 }
                                                 else
                                                 {
                                                     // Send message.
+                                                    string msg = "Sorry, I dont understand";
                                                     await botClient.SendTextMessageAsync(
                                                         chat.Id,
-                                                        "Sorry, I dont understand",
+                                                        msg,
                                                         replyMarkup: menuKeyboard);
+
+                                                    _logger.LogInformation($"bot send to {user} message : {msg}");
                                                 }
                                                 return;
                                             }
@@ -353,9 +416,11 @@ namespace KDZ7
                                     if (fileExtension != ".csv" && fileExtension != ".json")
                                     {
                                         // Send message.
+                                        string msg1 = "Unexpected format, send file with extension '.csv' or '.json'";
                                         await botClient.SendTextMessageAsync(
                                             chat.Id,
-                                            "Unexpected format, send file with extension '.csv' or '.json'");
+                                            msg1);
+                                        _logger.LogInformation($"bot send to {user} message : {msg1}");
                                         return;
                                     }
 
@@ -385,13 +450,17 @@ namespace KDZ7
                                     }
 
                                     // Send message.
+                                    string msg = "File readed succesfully.";
                                     await botClient.SendTextMessageAsync(
                                         chat.Id,
-                                        "File readed succesfully.",
+                                        msg,
                                         replyMarkup: menuKeyboard);
+
+                                    _logger.LogInformation($"bot send to {user} message : {msg}");
 
                                     //Update states.
                                     usersData[user.Id].State = UserState.InMenu;
+                                    _logger.LogInformation($"{user} new state - {usersData[user.Id].State}");
 
                                 }
 
@@ -402,10 +471,13 @@ namespace KDZ7
                             {
                                 // Send message about error.
                                 usersData[user.Id].State = UserState.InMenu;
+                                string msg = $"Exception : {e.Message}\nI return you to main menu";
                                 await botClient.SendTextMessageAsync(
                                     chat.Id,
-                                    $"Exception : {e.Message}\nI return you to main menu",
+                                    msg,
                                     replyMarkup: menuKeyboard);
+                                _logger.LogInformation($"{user} new state - {usersData[user.Id].State}");
+                                _logger.LogInformation($"bot send to {user} message : {msg}");
 
                             }
                             break;
@@ -415,7 +487,7 @@ namespace KDZ7
             catch (Exception exc)
             {
                 // Log exception.
-                Console.WriteLine(exc.Message);
+                _logger.LogInformation($"exception :: {exc.Message}");
             }
         }
     }

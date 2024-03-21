@@ -4,6 +4,7 @@ using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
+using Microsoft.Extensions.Logging;
 using StationsLib;
 
 namespace KDZ7
@@ -22,6 +23,9 @@ namespace KDZ7
         // Api key to bot.
         private string HttpApiKey;
 
+        // Logger.
+        private ILogger _logger;
+
         // Saving data of users states.
         private Dictionary<System.Int64, UserData> usersData;
 
@@ -37,8 +41,18 @@ namespace KDZ7
         // Constructor.
 		public StationsTgBot(string apiKey)
 		{
+            // Creating Logger.
+            var separator = Path.DirectorySeparatorChar;
+            var logPath = $"..{separator}..{separator}..{separator}..{separator}var{separator}log.txt";
+            System.IO.File.WriteAllText(logPath,"");
+            var loggerFactory = LoggerFactory.Create(builder =>
+            {
+                builder.AddProvider(new TgBotLoggerProvider(logPath));
+            });
+            _logger = loggerFactory.CreateLogger("FileLogger");
+
             // Initializing useful fields.
-			HttpApiKey = apiKey;
+            HttpApiKey = apiKey;
             usersData = new Dictionary<System.Int64, UserData>();
             _botClient = new TelegramBotClient(HttpApiKey);
 
@@ -65,7 +79,7 @@ namespace KDZ7
 
             var me = await _botClient.GetMeAsync(); 
 
-            Console.WriteLine($"{me.FirstName} Started!");
+            _logger.LogInformation($"{me.FirstName} Started!");
 
             // Endless pooling.
             await Task.Delay(-1); 
