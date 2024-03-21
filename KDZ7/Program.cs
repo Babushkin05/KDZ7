@@ -11,7 +11,7 @@ namespace KDZ7
         public static async Task Main(string[] args)
         {
 
-            StationsTgBot bot = new StationsTgBot("");
+            StationsTgBot bot = new StationsTgBot("tgbotapikey");
             await bot.LaunchBot();
 
         }
