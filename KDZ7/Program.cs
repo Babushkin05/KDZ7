@@ -16,7 +16,7 @@ namespace KDZ7
         public static async Task Main(string[] args)
         {
             // Api key to bot.
-            string tgBotApiKey = "KEY";
+            string tgBotApiKey = "6853916219:AAEcJ6-faiX_VIPaLKFYkcIHP3p5QzygpN8";
 
             // Create tgBot example.
             StationsTgBot bot = new StationsTgBot(tgBotApiKey);
