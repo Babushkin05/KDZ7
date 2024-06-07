@@ -1,7 +1,7 @@
 # KDZ7
 ## telegram bot
 
-### Open @stations_tgbot in telegram to check it.
+### Open @stations_tgbot in telegram to check it. (bot isn't host now)
 
 ![text](media/metro.GIF)
 
